@@ -1,1 +1,1 @@
-# propositional-logic-calculator
+# postfix
