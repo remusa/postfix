@@ -62,6 +62,7 @@ public class Posfijo {
     }
 
     private void getPrioridad() {
+        prioridad.put("^", 2);
         prioridad.put("*", 3);
         prioridad.put("/", 3);
         prioridad.put("+", 4);
@@ -97,6 +98,7 @@ public class Posfijo {
                 case "OR":
                 case "NOT":
                 case "AND":
+                case "^":
                 case "+":
                 case "-":
                 case "*":
@@ -108,22 +110,18 @@ public class Posfijo {
                 case "!=":
                 case "==":
                 case "=":
-
                     if (operadores.empty()) {
-
                         operadores.push(lex);
                     } else {
-
-                        while (!operadores.empty() && !operadores.stacktop().equals("(") && this.prioridad.get(lex) >= this.prioridad.get(operadores.stacktop())) {
+                        while (!operadores.empty() && !operadores.stacktop().equals("(")
+                                && this.prioridad.get(lex) >= this.prioridad.get(operadores.stacktop())) {
                             aux = operadores.pop();
                             operandos.push(aux);
                         }
-
                         operadores.push(lex);
                     }
                     break;
                 default:
-
                     operandos.push(lex);
                     break;
             }
